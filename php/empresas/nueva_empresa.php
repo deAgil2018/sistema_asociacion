@@ -191,8 +191,36 @@ $(function(){
 </script>
 
 <script>
-    function validar(e){};
+    function validar(e){
+        console.log("salado");
+        var de = $(e).val();
+        var eledata = {ele:'1', data:de};
+        $.ajax({
+            dataType: "json",
+            method: "POST",
+            url:'json_validar_ingenio.php',
+            data : eledata,
+        }).done(function(msg) {
+            console.log(msg);
+            if(msg.exito){
+                console.log(msg.exito);
+            }else if (msg.error){
+                 $.bootstrapGrowl('<h4>Error !</h4> <p>El correo ya existe</p>', {
+                    type: "danger",
+                    delay: 2500,
+                    allow_dismiss: true
+                });
+                $(e).val("");
+                console.log(msg.error);
+            }
+            else{
+               console.log(msg.error2);
+            }
 
+
+        });
+
+    }
 
 </script>
 <script src="../../js/pages/ecomProducts.js"></script>

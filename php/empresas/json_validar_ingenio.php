@@ -2,7 +2,7 @@
     @session_start();
 	include_once("../../Conexion/Conexion.php");
     if ($_POST["ele"]=="1") {
-        	$query_codigo = "SELECT correo  from ingenio where correo ='".$_POST[data]."'";
+        	$query_codigo = "SELECT email  from empresa where email ='".$_POST[data]."'";
         	try {
         		$comando = Conexion::getInstance()->getDb()->prepare($query_codigo);
 	            $comando->execute();
@@ -18,7 +18,7 @@
 
 
     } else if ($_POST["ele"]=="2") {
-            $query_codigo = "SELECT correo from ingenio where correo ='".$_POST[data]."' and correo<>'".$_POST[email_anterior]."' ";
+            $query_codigo = "SELECT email from empresa where email ='".$_POST[data]."' and email<>'".$_POST[email_anterior]."' ";
             try {
                 $comando = Conexion::getInstance()->getDb()->prepare($query_codigo);
                 $comando->execute();
