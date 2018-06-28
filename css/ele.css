@@ -1,0 +1,149 @@
+.form-group.formele {
+    margin-top: -25px;
+}
+
+.elearticle p {
+    font-size: 12px !important;
+}
+
+button#btn_subir_img {
+    color: #fff;
+    background-color: #616161;
+    border-color: #616161;
+}
+
+.form-group.eleimagen {
+    margin-left: 0px !important;
+}
+
+.col-sm-6.elecold {
+    padding-bottom: 2%;
+}
+
+.error {
+    color: #d01f1f;
+    animation-name: slideDown;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    visibility: visible;
+}
+
+.ocultar {
+    display: none;
+}
+
+
+.table thead > tr > th {
+    font-size: 12px !important;
+    font-weight: 600;
+}
+
+
+table#deletabla {
+    width: 100% !important;
+}
+
+img.elei.widget-image.img-circle.pull-right.animation-fadeIn {
+    width: 100px;
+    height: 100px;
+    margin-left: -78px;
+    border-radius: 49px;
+    background: rgba(255, 255, 255, 0.75);
+    margin-top: -1%;
+}
+
+
+span.animation-pulse.eleanimacion {
+    display: inline-block;
+    padding: 6px;
+    vertical-align: middle;
+    font-size: 13px;
+    background-color: #3a4363;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: .25em;
+    box-sizing: border-box;
+    transform: scale(1);
+    opacity: 1;
+    transform: scale(0.9);
+    opacity: 0.7;
+}
+
+span.animation-pulse.eleanimacionn1 {
+    display: inline-block;
+    padding: 6px;
+    vertical-align: middle;
+    font-size: 13px;
+    background-color: #e74c3c;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: .25em;
+    box-sizing: border-box;
+    transform: scale(1);
+    opacity: 1;
+    transform: scale(0.9);
+    opacity: 0.7;
+}
+
+img#imagen_men {
+    height: 400px !important;
+    width: 600px !important;
+}
+
+img#eleimagen {
+    width: 100px;
+    height: 100px;
+    margin-left: 0px;
+    border-radius: 0px;
+    background: rgba(255, 255, 255, 0.75);
+    margin-top: 0px;
+}
+
+img#imagen_modal {
+    height: 136px;
+}
+
+img#ele_imgperfil {
+    height: 400px !important;
+    width: 600px !important;
+}
+
+a#a3, a#a4 {
+    font-size: 17px;
+}
+
+@media (max-width: 767px){
+   .content-header.class_fixele {
+        margin-top: 10px !important;
+    }
+
+    /*#ele_header a {
+        font-size: 56px;
+        margin: 2px 0 0 10px;
+        color: #eaedf1;
+        margin: 0 0 0 10px;
+        line-height: 64px;
+    }*/
+
+    .nav.navbar-nav-custom > li {
+        min-height: 50px;
+        float: right;
+    }
+    span#titulo_perfil {
+        font-size: 12px;
+        position: relative;
+    }
+
+    span#viene {
+        font-size: 20px !important;
+    }
+
+   
+
+
+}
+
