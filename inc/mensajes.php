@@ -27,5 +27,7 @@ define("CONFIRMAR_ELIMINAR","Si, eliminarlo");
 define("MENSAJE_ELIMINAR_ALERT","¿Desea eliminar el dato seleccionado?");
 define("MENSAJE_ELIMINAR_CONFIRMAR","¿Realmente desea eliminarlo?");
 
+define("MENSAJE_SALIR","¿Desea salir del sistema?");
+
 
 ?>
