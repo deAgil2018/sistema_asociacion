@@ -2,7 +2,7 @@
     @session_start();
 	include_once("../../Conexion/Conexion.php");
     if ($_POST["ele"]=="1") {
-        	$query_codigo = "SELECT email  from empresa where email ='".$_POST[data]."'";
+        	$query_codigo = "SELECT telefono  from telefonos_empresa where telefono ='".$_POST[data]."'";
         	try {
         		$comando = Conexion::getInstance()->getDb()->prepare($query_codigo);
 	            $comando->execute();
@@ -18,17 +18,17 @@
 
 
     } else if ($_POST["ele"]=="2") {
-            $query_codigo = "SELECT email from empresa where email ='".$_POST[data]."' and email<>'".$_POST[correo2]."' ";
+            $query_codigo = "SELECT telefono from telefonos_empresa where telefono ='".$_POST[data]."' and telefono<>'".$_POST[correo2]."' ";
             try {
                 $comando = Conexion::getInstance()->getDb()->prepare($query_codigo);
                 $comando->execute();
 
 
                 if($comando->rowCount()>0){
-                    $array = array("Ya existe el correo",$query_codigo);
+                    $array = array("Ya existe el telefono",$query_codigo);
                     echo json_encode(array("error" => $array ));
                 }else{
-                    $array = array("NO existe el correo",$query_codigo);
+                    $array = array("NO existe el telefono",$query_codigo);
                     echo json_encode(array("exito" => $array ));
                 }
             } catch (Exception $e) {

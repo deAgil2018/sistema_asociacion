@@ -205,7 +205,7 @@ var Ingenio = function() {
 
 
 
-             $('#registro_telefono_ingenio').validate({
+            $('#registro_telefono_ingenio').validate({
                 errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
@@ -231,6 +231,37 @@ var Ingenio = function() {
                 messages: {
                     'nombre2': 'Por favor ingrese el nombre del responsable',
                     'telefono2': 'Por favor ingrese el número de teléfono',
+                    
+
+                }
+            });
+
+            $('#registro_actualizar_telefono').validate({
+                errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+                success: function(e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    'nombre1': {
+                        required: true
+                    },
+                    'nombre1': {
+                        required: true
+                    }
+               },
+
+                messages: {
+                    'nombre1': 'Por favor ingrese el nombre del responsable',
+                    'nombre1': 'Por favor ingrese el número de teléfono',
                     
 
                 }

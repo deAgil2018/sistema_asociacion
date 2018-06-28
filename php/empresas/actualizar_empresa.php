@@ -134,7 +134,8 @@
                     
                     <form method="post" id="registro" name="registro" class="form-horizontal animation-fadeIn">
                         <input type="hidden" name="des" value="actualizar">
-                        <input type="hidden" id = 'correo2' name="correo2" value="">
+                        <input type="hidden" id = 'correo2' name="correo2" >
+                       
                         <input type="hidden" id = 'id' name="id">
 
                         <div class="row ">
@@ -380,6 +381,7 @@
             $("#nit1").val(elem.attr('data-nit'));
             $("#tipo_empresa1").val(elem.attr('data-tipo_empresa'));
             $("#correo1").val(elem.attr('data-correo'));
+            $("#correo2").val(elem.attr('data-correo'));            
             $("#cheque_nombre1").val(elem.attr('data-cheque_nombre_de'));
             $("#detalle_nombre1").val(elem.attr('data-detalle_cuenta_bancaria_nombre'));
             $("#detalle_numero1").val(elem.attr('data-detalle_cuenta_bancaria_numero'));
@@ -445,6 +447,41 @@
         });
 
     });
+
+</script>
+
+<script>
+    function validar(e){
+        console.log("salado");
+        var de = $(e).val();
+
+        var eledata = {ele:'2', data:de,correo2:$("#correo2").val()};
+        $.ajax({
+            dataType: "json",
+            method: "POST",
+            url:'json_validar_ingenio.php',
+            data : eledata,
+        }).done(function(msg) {
+            console.log(msg);
+            if(msg.exito){
+                console.log(msg.exito);
+            }else if (msg.error){
+                 iziToast.error({
+                    title: '<?php echo ERROR; ?>',
+                    message: '<?php echo ERROR_CORREO;?>',
+                    timeout: 3000,
+                });
+                $(e).val("");
+                console.log(msg.error);
+            }
+            else{
+               console.log(msg.error2);
+            }
+
+
+        });
+
+    }
 
 </script>
 <?php include '../../inc/template_end.php'; ?>

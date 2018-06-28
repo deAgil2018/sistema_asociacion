@@ -105,7 +105,7 @@
                                         <li>
                                             <a id='a1' data-iid ='$row[id]' data-identificador='$row[identificador]' data-correo='$row[correo]' data-numero_fda='$row[numero_fda]' data-direccion='$row[direccion]' data-nombre ='$row[nombre]' data-nit ='$row[nit]' data-conoperativo ='$row[contacto_operativo]' data-concomercial ='$row[contacto_comercial]' data-contacto_otros ='$row[contacto_otros]' data-confinanciero ='$row[contacto_financiero]' data-condocumentos ='$row[contacto_documentos]' data-nrc ='$row[nrc]' data-fax ='$row[fax]' data-cfactura ='$row[contacto_contabilidad_factura]' data-cenision ='$row[contacto_contabilidad_emision]'data-id ='$row[id]' data-toggle='tooltip' title='Editar' href='javascript:void(0)' data-toggle='modal'><i class='fa fa-pencil pull-right'></i>Editar Ingenio</a>
                                             <a  data-elid='$row[id]' id='btn_telefono' data-toggle='tooltip' title='Agregar telefono' href='javascript:void(0)'><i class='fa fa-plus pull-right'></i>Agregar Telefono</a>
-                                            <a data-correo ='$row[correo]' data-elid='$row[id]' id='btn_actualizar_telefono' data-toggle='tooltip' title='Actualizar telefono' href='javascript:void(0)'><i class='fa fa-wrench pull-right'></i>Actualizar Telefonos</a>
+                                            <a  data-elid='$row[id]' id='btn_actualizar_telefono' data-toggle='tooltip' title='Actualizar telefono' href='javascript:void(0)'><i class='fa fa-wrench pull-right'></i>Actualizar Telefonos</a>
                                             <a data-correo ='$row[correo]' data-elid='$row[id]' id='btn_firma' data-toggle='tooltip' title='Agregar firma' href='javascript:void(0)'><i class='fa fa-plus pull-right'></i>Agregar Firma</a>
                                             <a data-correo ='$row[correo]' data-elid='$row[id]' id='btn_actualizar_firma' data-toggle='tooltip' title='Actualizar firmas' href='javascript:void(0)'><i class='fa fa-wrench pull-right'></i>Actualizar Firmas</a>
                                         </li>
@@ -147,7 +147,7 @@
                     
                     <form method="post" id="registro_ingenio_modal" name="registro_ingenio_modal" class="form-horizontal animation-fadeIn">
                         <input type="hidden" name="des" value="actualizar">
-                        <input type="hidden" id = 'correo2' name="correo2">
+                        <input type="hidden" id = 'email_anterior' name="email_anterior">
                         <input type="hidden" id = 'id' name="id">
 
                         <div class="row ">
@@ -382,14 +382,16 @@
     function validar(e){
         console.log("salado");
         var de = $(e).val();
-        var eledata = {ele:'1', data:de};
+        var email_anterior=$("#email_anterior").val();
+        var eledata = {ele:'2', data:de,email_anterior:email_anterior};
+        console.log("eledata",eledata);
         $.ajax({
             dataType: "json",
             method: "POST",
             url:'json_validar_ingenio.php',
             data : eledata,
         }).done(function(msg) {
-            console.log(msg);
+            console.log("esto retorna",msg);
             if(msg.exito){
                 console.log(msg.exito);
             }else if (msg.error){
@@ -532,7 +534,7 @@
             var elem=$(this);
             var id =elem.attr('data-elid');
             $("#id").val();
-            $(location).attr('href','actualizar_telefono_ingenio.php?id='+trader+'&date=<?php echo date("Yhmsi") ?>');
+            $(location).attr('href','actualizar_telefono_ingenio.php?id='+id+'&date=<?php echo date("Yhmsi") ?>');
 
         });
 
@@ -563,6 +565,7 @@
             $("#con_financiero1").val(elem.attr('data-confinanciero'));
             $("#con_documentacion1").val(elem.attr('data-condocumentos'));
             $("#correo1").val(elem.attr('data-correo'));
+            $("#email_anterior").val(elem.attr('data-correo'));
             $("#identificador1").val(elem.attr('data-identificador'));
             $("#nrc1").val(elem.attr('data-nrc'));
             $("#fax1").val(elem.attr('data-fax'));
@@ -634,7 +637,7 @@
             $.ajax({
                 dataType: "json",
                 method: "POST",
-                url:'json_eliminar_ingenio.php',
+                url:'json_insertar_telefono.php',
                 data : get,
             }).done(function(msg) {
                 
@@ -642,7 +645,7 @@
                 if(msg.exito){
                     iziToast.success({
                         title: '<?php echo EXITO; ?>',
-                        message: '<?php echo EXITO_ACTUALIZAR;?>',
+                        message: '<?php echo EXITO_MENSAJE;?>',
                         timeout: 3000,
                     });
 

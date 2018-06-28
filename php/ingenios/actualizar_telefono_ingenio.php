@@ -122,7 +122,7 @@
                 </div>
                 <div class="modal-body">
                     
-                    <form method="post" id="registro" name="registro" class="form-horizontal animation-fadeIn">
+                    <form method="post" id="registro_actualizar_telefono" name="registro_actualizar_telefono" class="form-horizontal animation-fadeIn">
                         <input type="hidden" name="des" value="actualizar">
                         <input type="hidden" id = 'correo1' name="correo" value="">
                         <input type="hidden" id = 'id' name="id">
@@ -170,13 +170,14 @@
                              
                         </div>
 
-                    </form>
+                    
 
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" id="m_save" class="btn btn-sm btn-primary">Save changes</button>
+                    <button type="button"  class="btn btn-sm btn-default" data-dismiss="modal"><?php echo CANCELAR ?></button>
+                    <button type="submit"  class="btn btn-sm btn-primary"><?php echo GUARDAR ?></button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -187,7 +188,8 @@
 </div>
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
-
+<script src="../../js/pages/ingenio.js?id=<?php echo date('Yidisus') ?>"></script>
+<script>$(function(){ Ingenio.init(); });</script>
 <!-- Load and execute javascript code used only in this page -->
 <script src="../../js/pages/ecomProducts.js"></script>
 <script>$(function(){ EcomProducts.init(); });</script>
@@ -207,11 +209,11 @@
             console.log("llega correo1",elcorre);
             
             swal({
-                title: '¿Eliminar número?',
+                title: '<h4><?php echo MENSAJE_ELIMINAR_ALERT?><h4>',
                 text: "",
                 html: 
-                '<br><button class="btn btn-danger" data-elcorreo ="'+elcorre+'" id="btn_eliminar" data-toggle="tooltip" data-original-title="Eliminar"><i class="fa fa-bomb"></i> Eliminar</button> ' +
-                '<button class="btn btn-warning" id="btn_cancelar" data-toggle="tooltip" data-original-title="Cancelar"><i class="fa fa-times"></i> Cancelar</button>'
+                '<br><button class="btn btn-danger" data-elcorreo ="'+elcorre+'" id="btn_eliminar" data-toggle="tooltip" data-original-title="Eliminar"><?php echo ELIMINAR_ALERT ?></button> ' +
+                '<button class="btn btn-warning" id="btn_cancelar" data-toggle="tooltip" data-original-title="Cancelar"><?php echo CANCELAR_ALERT ?></button>'
                 ,
                 type: 'info',
                 showCancelButton: false,
@@ -235,10 +237,10 @@
                 var elcorreo = elem.attr('data-elcorreo');
                 console.log("llega correo2",elcorreo);
                 swal({
-                title: '¿Esta seguro?',
+                title: '<h3><?php echo MENSAJE_ELIMINAR_CONFIRMAR?></h3>',
                 text: "",
-                html: '<p class="h4 mensajes_alert">No hay vuelta atras</p><br><button class="btn btn-danger" data-correo="'+elcorreo+'" id="btn_sip" data-toggle="tooltip" data-original-title="Si, eliminar"><i class="fa fa-bomb"></i> Si, eliminar</button> ' +
-                '<button class="btn btn-info" id="btn_nop" data-toggle="tooltip" data-original-title="No"><i class="fa fa-times"></i> No</button>',
+                html: '<p class="h4 mensajes_alert">No hay vuelta atras</p><br><button class="btn btn-danger" data-correo="'+elcorreo+'" id="btn_sip" data-toggle="tooltip" data-original-title="Si, eliminar"><?php echo CONFIRMAR_ELIMINAR ?></button> ' +
+                '<button class="btn btn-info" id="btn_nop" data-toggle="tooltip" data-original-title="No"><?php echo CANCELAR_ALERT ?></button>',
                 type: 'info',
                 showCancelButton: false,
                 showConfirmButton: false,
@@ -259,34 +261,43 @@
                 $.ajax({
                     dataType: "json",
                     method: "POST",
-                    url:'json/eliminar_telefono_ingenio.php',
+                    url:'eliminar_telefono_ingenio.php',
                     data : get,
                 }).done(function(msg) {
                     console.log(msg);
                      if(msg.exito[0]){
-                            $.bootstrapGrowl('<h4>Excelente !</h4> <p>Datos Eliminados!</p>', {
-                            type: "success",
-                            delay: 2500,
-                            allow_dismiss: true
-                        });
+                        console.log("esta1");
 
+                        iziToast.success({
+                            title: '<?php echo ELIMINAR; ?>',
+                            message: '<?php echo ELIMINAR_MENSAJE;?>',
+                            timeout: 3000,
+                        });
                         NProgress.done();
-                        location.reload();
-                        /*var timer=setInterval(function(){
-                            
+
+                        $(this).prop('disabled', true);
+                        var timer=setInterval(function(){
+                            location.reload();
                             clearTimeout(timer);
-                        },100);*/
+                        },3500);
+                        
 
                         
                     }else if (msg.exito[4]){
-                        console.log('Error fatal en la base de datos, contacte a su administrador');
+                        console.log("esta2");
+                        NProgress.done();
+                        iziToast.error({
+                            title: '<?php echo ERROR; ?>',
+                            message: '<?php echo ERROR_MENSAJE;?>',
+                            timeout: 3000,
+                        });
                     }
                     else {
                         NProgress.done();
-                        $.bootstrapGrowl('<h4>Error!</h4> <p>el cliente  no ha sido elimnado!</p>', {
-                            type: "danger",
-                            delay: 2500,
-                            allow_dismiss: true
+                        iziToast.error({
+                            title: '<?php echo ERROR; ?>',
+                            message: '<?php echo ERROR_MENSAJE;?>',
+                            timeout: 3000,
                         });
                     }
                 });
@@ -317,39 +328,42 @@
         });
 
         /******cerrar modal*******/
-        $(document).on("click", "#m_save", function (e) {
+        $(document).on("submit", "#registro_actualizar_telefono", function (e) {
+            console.log("llega");
+            e.preventDefault();
             $("#modal_ele").modal('toggle'); 
-            var get = $("#registro").serialize();
+            var get = $("#registro_actualizar_telefono").serialize();
             console.log(get);
                 $.ajax({
                 dataType: "json",
                 method: "POST",
-                url:'json/eliminar_telefono_ingenio.php',
+                url:'eliminar_telefono_ingenio.php',
                 data : get,
             }).done(function(msg) {
                 console.log("esto trae",msg);
                 
                 if(msg.exito){
-                        $.bootstrapGrowl('<h4>Excelente !</h4> <p>Datos Actualizados!</p>', {
-                        type: "success",
-                        delay: 2500,
-                        allow_dismiss: true
+                    iziToast.success({
+                        title: '<?php echo EXITO; ?>',
+                        message: '<?php echo EXITO_ACTUALIZAR;?>',
+                        timeout: 3000,
                     });
-
                     NProgress.done();
-                    location.reload();
-                    /*var timer=setInterval(function(){
-                        
+
+                    $(this).prop('disabled', true);
+                    var timer=setInterval(function(){
+                        location.reload();
                         clearTimeout(timer);
-                    },100);*/
+                    },3500);
+                        
                     
                 }
                 else {
                     NProgress.done();
-                    $.bootstrapGrowl('<h4>Error!</h4> <p>el cliente  no ha sido elimnado!</p>', {
-                        type: "danger",
-                        delay: 2500,
-                        allow_dismiss: true
+                    iziToast.error({
+                        title: '<?php echo ERROR; ?>',
+                        message: '<?php echo ERROR_MENSAJE;?>',
+                        timeout: 3000,
                     });
                 }
 

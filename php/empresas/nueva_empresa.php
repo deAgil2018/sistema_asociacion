@@ -30,6 +30,7 @@
                     <h2><strong>Información de la</strong> Empresa</h2>
                 </div>
                     <input type="hidden" name="trader" id="trader" value="<?php echo $_GET[id] ?>">
+                    <input type="hidden" id = 'ele' name="ele" value="1">
                     <!--Nombre-->
                     <div class="form-group">
                         <div class="col-xs-12">
@@ -205,10 +206,10 @@ $(function(){
             if(msg.exito){
                 console.log(msg.exito);
             }else if (msg.error){
-                 $.bootstrapGrowl('<h4>Error !</h4> <p>El correo ya existe</p>', {
-                    type: "danger",
-                    delay: 2500,
-                    allow_dismiss: true
+                 iziToast.error({
+                    title: '<?php echo ERROR; ?>',
+                    message: '<?php echo ERROR_CORREO;?>',
+                    timeout: 3000,
                 });
                 $(e).val("");
                 console.log(msg.error);

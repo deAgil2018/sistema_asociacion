@@ -145,7 +145,7 @@ $(function(){
    });
 </script>
 
-<!--<script>
+<script>
     function validar(e){
         console.log("salado");
         var de = $(e).val();
@@ -153,17 +153,17 @@ $(function(){
         $.ajax({
             dataType: "json",
             method: "POST",
-            url:'json/validar_trader.php',
+            url:'json_validar_telefono_empresa.php',
             data : eledata,
         }).done(function(msg) {
             console.log(msg);
             if(msg.exito){
                 console.log(msg.exito);
             }else if (msg.error){
-                 $.bootstrapGrowl('<h4>Error !</h4> <p>El correo ya existe</p>', {
-                    type: "danger",
-                    delay: 2500,
-                    allow_dismiss: true
+                 iziToast.error({
+                    title: '<?php echo ERROR; ?>',
+                    message: '<?php echo ERROR_CORREO;?>',
+                    timeout: 3000,
                 });
                 $(e).val("");
                 console.log(msg.error);
@@ -175,9 +175,11 @@ $(function(){
 
         });
 
-    }-->
+    }
 
 </script>
+
+
 <script src="../js/pages/ecomProducts.js"></script>
 <script>$(function(){ EcomProducts.init(); });</script>
 <?php include '../inc/template_end.php'; ?>

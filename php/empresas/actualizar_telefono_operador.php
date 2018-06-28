@@ -126,6 +126,7 @@
                         <input type="hidden" name="des" value="actualizar">
                         <input type="hidden" id = 'correo1' name="correo" value="">
                         <input type="hidden" id = 'id' name="id">
+                        <input type="hidden" id = 'correo2' name="correo2" >
 
                         <div class="row ">
                             <div class="col-md-6">
@@ -309,6 +310,7 @@
             var elem=$(this);
             $("#nombre1").val(elem.attr('data-nombre'));
             $("#telefono1").val(elem.attr('data-telefono'));
+            $("#correo2").val(elem.attr('data-telefono'));
             $("#id").val(elem.attr('data-id'));
             //$("#rol").select2("val",elem.attr('data-nivel')); 
             $("#modal_ele").modal({
@@ -371,6 +373,41 @@
         });
 
     });
+
+</script>
+
+<script>
+    function validar(e){
+        console.log("salado");
+        var de = $(e).val();
+
+        var eledata = {ele:'2', data:de,correo2:$("#correo2").val()};
+        $.ajax({
+            dataType: "json",
+            method: "POST",
+            url:'json_validar_telefono_empresa.php',
+            data : eledata,
+        }).done(function(msg) {
+            console.log(msg);
+            if(msg.exito){
+                console.log(msg.exito);
+            }else if (msg.error){
+                 iziToast.error({
+                    title: '<?php echo ERROR; ?>',
+                    message: '<?php echo ERROR_CORREO;?>',
+                    timeout: 3000,
+                });
+                $(e).val("");
+                console.log(msg.error);
+            }
+            else{
+               console.log(msg.error2);
+            }
+
+
+        });
+
+    }
 
 </script>
 <?php include '../../inc/template_end.php'; ?>

@@ -6,7 +6,7 @@
 
 /***contantes para mensajes en ventanas***/
 define("GUARDAR", "Guardar Datos");
-define("CANCELAR", "cancelar");
+define("CANCELAR", "Cancelar");
 define("ACTUALIZAR", "Actualizar Datos");
 define("CERRAR_MODAL", "Cerrar");
 define("BASE_URL", "https://192.168.1.253:8081/desarrollo/sistema_asociacion/");
@@ -27,7 +27,7 @@ define("CONFIRMAR_ELIMINAR","Si, eliminarlo");
 define("MENSAJE_ELIMINAR_ALERT","¿Desea eliminar el dato seleccionado?");
 define("MENSAJE_ELIMINAR_CONFIRMAR","¿Realmente desea eliminarlo?");
 
-define("MENSAJE_SALIR","¿Desea salir del sistema?");
+define("MENSAJE_SALIR","¿Desea salir del sistema asdfasdfasaf  ?");
 
 
 ?>
