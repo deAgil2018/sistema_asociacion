@@ -1,1 +1,3 @@
-<?php header('Location: php/ingreso/ingreso.php');?>
+<?php header('Location: php/ingreso/ingreso.php');
+//prueba
+?>
