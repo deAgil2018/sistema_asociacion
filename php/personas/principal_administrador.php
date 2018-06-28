@@ -208,7 +208,7 @@ $(function(){
         $.ajax({
             dataType: "json",
             method: "POST",
-            url:'json/validar_cliente.php',
+            url:'validar_cliente.php',
             data : eledata,
         }).done(function(msg) {
             console.log(msg);

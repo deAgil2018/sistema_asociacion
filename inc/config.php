@@ -1,13 +1,6 @@
 <?php
-
-
 @session_start(); 
-/***contantes para mensajes en ventanas***/
-define("ACTUALIZAR", "Actualizar Datos");
-define("CERRAR_MODAL", "Cerrar");
-define("BASE_URL", "https://192.168.1.253:8081/desarrollo/sistema_asociacion/");
-define("EXITO","Excelente");
-define("EXITO_MENSAJE","Datos almacenados");
+require_once('mensajes.php');
 
 /***array para el menu*/
 
